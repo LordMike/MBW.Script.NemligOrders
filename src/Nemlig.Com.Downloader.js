@@ -63,7 +63,7 @@ async function updateAll() {
     return orderDetails;
 }
 
-async function downloadAction(e) {
+async function downloadAction() {
     var divNode = document.createElement('div');
     divNode.setAttribute('id', 'mbw_nemlig_div');
 
@@ -90,3 +90,5 @@ async function downloadAction(e) {
 
     window.setTimeout(function () { zNode.remove(); }, 1000);
 }
+
+window.performNemligOrdersDownload = downloadAction;
