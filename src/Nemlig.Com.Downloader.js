@@ -70,11 +70,11 @@ async function downloadAction() {
 
     menuNode.prepend(menuItem);
 
-    menuItem.innerHTML = 'Downloading';
+    menuItem.innerHTML = '<a class="meta-menu__link" href="#"><strong>Downloading</strong></a>';
 
     var details = await updateAll();
 
-    menuItem.innerHTML = 'Downloaded ' + details.length + ' orders';
+    menuItem.innerHTML = '<a class="meta-menu__link" href="#"><strong>Downloaded ' + details.length + ' orders</strong></a>';
 
     var data = JSON.stringify(details);
     var downloadA = document.createElement('a');
@@ -86,7 +86,7 @@ async function downloadAction() {
     window.setTimeout(function () {
         menuItem.remove();
         downloadA.remove();
-    }, 1000);
+    }, 10000);
 }
 
 window.performNemligOrdersDownload = downloadAction;
