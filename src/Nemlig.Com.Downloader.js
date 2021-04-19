@@ -64,22 +64,17 @@ async function updateAll() {
 }
 
 async function downloadAction() {
-    var divNode = document.createElement('div');
-    divNode.setAttribute('id', 'mbw_nemlig_div');
+    var menuNode = document.getElementsByClassName('meta-menu__list')[0];
+    var menuItem = document.createElement('li');
+    menuItem.setAttribute('class', 'meta-menu__item');
 
-    var ordersHeader = document.getElementsByTagName("h1")[0];
-    var ordersDom = ordersHeader.parentNode;
+    menuNode.prepend(menuItem);
 
-    ordersDom.insertBefore(divNode, ordersHeader.nextSibling);
-
-    var zNode = document.createElement('p');
-    divNode.appendChild(zNode);
-
-    zNode.innerHTML = 'Downloading';
+    menuItem.innerHTML = 'Downloading';
 
     var details = await updateAll();
 
-    zNode.innerHTML = 'Downloaded ' + details.length + ' orders';
+    menuItem.innerHTML = 'Downloaded ' + details.length + ' orders';
 
     var data = JSON.stringify(details);
     var downloadA = document.createElement('a');
@@ -88,7 +83,10 @@ async function downloadAction() {
     document.getElementsByTagName('body')[0].appendChild(downloadA);
     downloadA.click();
 
-    window.setTimeout(function () { zNode.remove(); }, 1000);
+    window.setTimeout(function () {
+        menuItem.remove();
+        downloadA.remove();
+    }, 1000);
 }
 
 window.performNemligOrdersDownload = downloadAction;
