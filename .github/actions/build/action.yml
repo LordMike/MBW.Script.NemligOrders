@@ -1,0 +1,19 @@
+name: Validate Nemlig orders script
+description: Check the browser script with the repository's supported Node.js runtime
+
+# Contract:
+# - The managed CI workflow calls this action exactly once.
+# - This repository has no package-manager build or automated test suite.
+# - The action validates source syntax and produces no publishing artifacts.
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Node.js
+      uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+      with:
+        node-version: '24'
+
+    - name: Check browser script syntax
+      shell: bash
+      run: node --check src/Nemlig.Com.Downloader.js
